@@ -1,50 +1,405 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Personal Website</title>
-  </head>
-  <body>
-    <div id="app">
-      <header>
-        <nav>
-          <a href="#home" class="logo">MySite</a>
-          <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush Govind — ML & Data Science</title>
+  <meta name="description" content="Portfolio of Ayush Govind — ML and Data Science graduate student at UC San Diego with experience in medical imaging, multimodal learning, and AI systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #11161d;
+      --card: #151c25;
+      --border: #232d3a;
+      --text: #e6edf3;
+      --muted: #94a3b8;
+      --accent: #4cc9f0;
+      --accent-2: #7c6cf0;
+      --max-w: 1080px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono { font-family: "JetBrains Mono", monospace; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
 
-      <main>
-        <section id="home">
-          <h1>Welcome</h1>
-          <p>I'm a developer building things on the internet.</p>
-        </section>
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.05rem; color: var(--text); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: 0.92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
 
-        <section id="about">
-          <h2>About Me</h2>
-          <p>This is a minimal personal website built with Vite and Vanilla JS. It's designed to be simple, fast, and easy to expand.</p>
-        </section>
+    /* Hero */
+    header {
+      padding: 110px 0 90px;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 10%, rgba(76, 201, 240, 0.08), transparent),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(124, 108, 240, 0.07), transparent);
+    }
+    .hero-kicker {
+      color: var(--accent); font-size: 0.95rem; font-weight: 500;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero-sub {
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+      color: var(--muted); font-weight: 500; margin-bottom: 24px;
+      max-width: 640px;
+    }
+    .hero-desc { color: var(--muted); max-width: 620px; margin-bottom: 36px; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b0f14;
+    }
+    .btn-primary:hover { box-shadow: 0 8px 24px rgba(76, 201, 240, 0.25); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); }
 
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>Feel free to reach out via email or social media.</p>
-          <div class="social-links">
-             <a href="#">GitHub</a>
-             <a href="#">Twitter</a>
-             <a href="#">LinkedIn</a>
-          </div>
-        </section>
-      </main>
+    /* Sections */
+    section { padding: 72px 0; }
+    section:nth-of-type(even) { background: var(--bg-soft); }
+    .section-title {
+      font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .section-title::before { content: "# "; color: var(--accent); font-weight: 500; }
+    .section-sub { color: var(--muted); margin-bottom: 40px; }
 
-      <footer>
-        <p>&copy; 2026 My Name. Built with Vite.</p>
-      </footer>
+    /* Timeline / experience cards */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: rgba(76, 201, 240, 0.4); transform: translateY(-3px); }
+    .stack { display: flex; flex-direction: column; gap: 20px; }
+    .card-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 4px;
+    }
+    .card-title { font-size: 1.15rem; font-weight: 700; }
+    .card-org { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+    .card-date { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+    .card ul { margin: 12px 0 0 18px; color: var(--muted); }
+    .card li { margin-bottom: 8px; }
+    .card li::marker { color: var(--accent); }
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 600;
+      background: rgba(124, 108, 240, 0.15); color: #a99ef5;
+      border: 1px solid rgba(124, 108, 240, 0.3);
+      margin-left: 8px; vertical-align: middle;
+    }
+
+    /* Projects grid */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag {
+      font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+      padding: 3px 9px; border-radius: 6px;
+      background: rgba(76, 201, 240, 0.1); color: var(--accent);
+      border: 1px solid rgba(76, 201, 240, 0.2);
+    }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 860px) { .skills-grid { grid-template-columns: 1fr; } }
+    .skill-group h3 {
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted); margin-bottom: 14px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 6px 13px; border-radius: 8px; font-size: 0.85rem; font-weight: 500;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); }
+
+    /* Education */
+    .edu-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .gpa {
+      font-family: "JetBrains Mono", monospace; font-size: 0.85rem;
+      color: var(--accent);
+    }
+    .edu-detail { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+
+    /* Contact / footer */
+    .contact-box { text-align: center; padding: 20px 0; }
+    .contact-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.02em; }
+    .contact-box p { color: var(--muted); max-width: 520px; margin: 0 auto 32px; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0; text-align: center; color: var(--muted); font-size: 0.85rem;
+    }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">ayush<span>.govind</span></a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="container">
+    <p class="hero-kicker mono">Hi, my name is</p>
+    <h1>Ayush Govind.</h1>
+    <p class="hero-sub">I build AI systems for medical imaging and beyond.</p>
+    <p class="hero-desc">
+      ML and Data Science graduate student at UC San Diego with applied research experience in
+      medical imaging, multimodal learning, and AI systems — spanning model development,
+      benchmarking, and end-to-end deployment across research and industry settings.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">View my work</a>
+      <a class="btn btn-ghost" href="mailto:aygovind@ucsd.edu">Get in touch</a>
     </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-sub">Where I've worked and what I shipped.</p>
+    <div class="stack">
+      <div class="card reveal">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Associate AI Engineer</div>
+            <div class="card-org">Philips · Bangalore, India</div>
+          </div>
+          <div class="card-date">Oct 2024 – Aug 2025</div>
+        </div>
+        <ul>
+          <li>Developed a custom CNN-Regression architecture for mapping images to angles with 97% accuracy.</li>
+          <li>Built a novel, lightweight OCR algorithm using traditional image processing methods.</li>
+          <li>Submitted a patent for a grooming assistance system using face landmark detection and hair segmentation models to provide detailed guidance and feedback to users.</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-head">
+          <div>
+            <div class="card-title">R&amp;D Intern</div>
+            <div class="card-org">Philips · Bangalore, India</div>
+          </div>
+          <div class="card-date">Jan 2024 – Jul 2024</div>
+        </div>
+        <ul>
+          <li>Created a MedSAM-based foundation model for semantic segmentation of 40 cardiac structures in fetal ultrasound images across 5 view planes — mean Dice score of 80%.</li>
+          <li>Benchmarked nnU-Net, U-Mamba, and YOLOv8 through extensive experimentation.</li>
+          <li>Trained an HR-Net-based pose-estimation model on a manually curated dataset for cardiac biometry.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Selected research and hackathon work.</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Allerion <span class="badge">🏆 Best Innovation</span></div>
+            <div class="card-org">UCSD DataHacks 2026</div>
+          </div>
+          <div class="card-date">Apr 2026</div>
+        </div>
+        <ul>
+          <li>AI/ML-driven allergy risk prediction platform fusing API data, geospatial indexing, phenology-based forecasting, and LLM-generated explanations for personalized environmental health insights.</li>
+          <li>Engineered a data pipeline with the Google Pollen API, iNaturalist, H3, and FastAPI to model localized pollen exposure and generate map-based forecasts with interpretable recommendations.</li>
+          <li>Won Best Innovation with Google Build With AI at DataHacks 2026.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">React</span><span class="tag">Gemini</span>
+          <span class="tag">Firestore</span><span class="tag">Cloud Run</span><span class="tag">FastAPI</span>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Retinopathy of Prematurity Detection</div>
+            <div class="card-org">Centre for Pattern Recognition</div>
+          </div>
+          <div class="card-date">May 2023 – May 2024</div>
+        </div>
+        <ul>
+          <li>Led a team of four collaborating with Narayana Nethralaya Hospitals to train models for ROP diagnosis.</li>
+          <li>Processed over 500 GB of retinal fundus image data from 2,300 patients across Karnataka.</li>
+          <li>Fine-tuned EfficientNet models for three classification tasks: 93% (Stage), 85% (Plus-Disease), and 78% (Treatment-Decision) accuracy.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">PyTorch</span><span class="tag">EfficientNet</span><span class="tag">Medical Imaging</span>
+          <span class="tag">Computer Vision</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-sub">Tools and areas I work in.</p>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3>Languages</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">C/C++</span><span class="chip">Java</span>
+          <span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span>
+          <span class="chip">R</span><span class="chip">MATLAB</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>ML &amp; Frameworks</h3>
+        <div class="chips">
+          <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span>
+          <span class="chip">Scikit-learn</span><span class="chip">NumPy</span><span class="chip">Pandas</span>
+          <span class="chip">Matplotlib</span><span class="chip">LangChain</span><span class="chip">CUDA</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Infrastructure</h3>
+        <div class="chips">
+          <span class="chip">AWS</span><span class="chip">Microsoft Azure</span><span class="chip">Docker</span>
+          <span class="chip">Kubernetes</span><span class="chip">Hadoop</span><span class="chip">Git</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="margin-top: 28px;">
+      <h3>Research Areas</h3>
+      <div class="chips">
+        <span class="chip">Computer Vision</span><span class="chip">Medical Imaging</span>
+        <span class="chip">LLMs</span><span class="chip">NLP</span><span class="chip">Neural Networks</span>
+        <span class="chip">Mechanistic Interpretability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">Academic background.</p>
+    <div class="stack">
+      <div class="card reveal">
+        <div class="edu-row">
+          <div>
+            <div class="card-title">University of California, San Diego</div>
+            <div class="card-org">M.S. Data Science</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="card-date">Jan 2026 – Jun 2027</div>
+            <div class="gpa">GPA 4.0</div>
+          </div>
+        </div>
+        <p class="edu-detail">Relevant coursework: ML Systems, Statistical Modelling, Machine Learning, Numerical Linear Algebra</p>
+      </div>
+      <div class="card reveal">
+        <div class="edu-row">
+          <div>
+            <div class="card-title">PES University</div>
+            <div class="card-org">B.Tech Computer Science</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="card-date">Dec 2020 – May 2024</div>
+            <div class="gpa">GPA 3.9</div>
+          </div>
+        </div>
+        <p class="edu-detail">Relevant coursework: Reinforcement Learning, Big Data, Data Analytics, Database Management Systems</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact-box reveal">
+    <h2>Let's connect</h2>
+    <p>
+      I'm open to internships, research collaborations, and interesting ML problems.
+      The fastest way to reach me is email.
+    </p>
+    <div class="hero-cta" style="justify-content: center;">
+      <a class="btn btn-primary" href="mailto:aygovind@ucsd.edu">aygovind@ucsd.edu</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/ayushgovind" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/ayushgovind" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Ayush Govind · San Diego, CA · Built with plain HTML &amp; CSS
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>
+
+</body>
 </html>
